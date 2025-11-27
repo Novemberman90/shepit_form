@@ -1,0 +1,44 @@
+@use 'importer' as *;
+
+html {
+  scroll-behavior: smooth;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+ // @include Gordita-400;
+  font-size: 18px;
+  line-height: 1;
+  letter-spacing: 0;
+  color: $grey-text;
+  position: relative;
+  background-color: $dark-700;
+
+  &.lock {
+    overflow: hidden;
+  }
+}
+
+
+.main {
+  flex-grow: 1;
+}
+
+.container {
+  max-width: 1540px;
+  padding: 0 20px;
+  margin: 0 auto;
+}
+
+
+.title {
+ // @include Goldman-700;
+  //color: $white-400;
+
+}

@@ -1,0 +1,33 @@
+//$white-400: #FFFFFF;
+
+
+
+
+/* @mixin Goldman-700 {
+  font-family: "Goldman-Bold", sans-serif;
+  font-weight: 700;
+}
+ */
+
+ %checkbox-hidden,
+ %radio-hidden {
+   width: 1px;
+   height: 1px;
+   overflow: hidden;
+   clip: rect(0 0 0 0);
+   position: absolute;
+ }
+ %uppercase{
+   text-transform: uppercase;
+ }
+ %capitalaize {
+  text-transform: capitalize;
+ }
+
+ %visual-hiden {
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    clip: rect(0 0 0 0);
+    position: absolute;
+ }
