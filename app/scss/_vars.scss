@@ -1,13 +1,22 @@
-//$white-400: #FFFFFF;
+$green-700: #132C27;
+$green-600: #274B44;
+$text: #203226;
+$main-grey: #D9D9D9;
+$gold-star: #DB8C15;
+$withe-400: #FFFFFF;
 
 
 
 
-/* @mixin Goldman-700 {
-  font-family: "Goldman-Bold", sans-serif;
+@mixin KyivTypeSans-350 {
+  font-family: "KyivTypeSans-Regular", sans-serif;
+  font-weight: 350;
+}
+@mixin KyivTypeSans-700 {
+  font-family: "KyivTypeSerif-Bold", sans-serif;
   font-weight: 700;
 }
- */
+
 
  %checkbox-hidden,
  %radio-hidden {

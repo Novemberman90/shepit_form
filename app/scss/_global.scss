@@ -12,33 +12,27 @@ body {
 body {
   display: flex;
   flex-direction: column;
- // @include Gordita-400;
+  @include KyivTypeSans-350;
   font-size: 18px;
   line-height: 1;
   letter-spacing: 0;
-  color: $grey-text;
+  color: $text;
   position: relative;
-  background-color: $dark-700;
+  background-color: $white-400;
 
   &.lock {
     overflow: hidden;
   }
 }
 
+//@include KyivTypeSans-700;
 
 .main {
   flex-grow: 1;
 }
 
 .container {
-  max-width: 1540px;
-  padding: 0 20px;
+  max-width: 828px;
+  padding: 0 30px;
   margin: 0 auto;
-}
-
-
-.title {
- // @include Goldman-700;
-  //color: $white-400;
-
 }

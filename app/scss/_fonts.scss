@@ -1,11 +1,20 @@
 
-/* @font-face {
-  font-family: 'Goldman-Bold';
-  font-weight: 700;
+@font-face {
+  font-family: 'KyivTypeSans-Regular';
+  font-weight: 350;
   font-style: normal;
-  src: local('Goldman-Bold'),
-    url('../fonts/Goldman-Bold.woff2') format('woff2'),
-    url('../fonts/Goldman-Bold.woff') format('woff');
+  src: local('KyivTypeSans-Regular'),
+    url('../fonts/KyivTypeSans-Regular.woff2') format('woff2'),
+    url('../fonts/KyivTypeSans-Regular.woff') format('woff');
   font-display: swap;
 }
- */
+@font-face {
+  font-family: 'KyivTypeSerif-Bold';
+  font-weight: 700;
+  font-style: normal;
+  src: local('KyivTypeSerif-Bold'),
+    url('../fonts/KyivTypeSerif-Bold.woff2') format('woff2'),
+    url('../fonts/KyivTypeSerif-Bold.woff') format('woff');
+  font-display: swap;
+}
+
