@@ -126,4 +126,17 @@ window.addEventListener('DOMContentLoaded',()=>{
   });
 
 
+  /* Загрузка изображения */
+  const fileInput = document.querySelector('#photos');
+  const fileNameDisplay = document.querySelector('.preview');
+
+  fileInput.addEventListener("change", function(params) {
+    if ( fileInput.files.length > 0 ) {
+      fileNameDisplay.textContent = fileInput.files[0].name;
+      fileNameDisplay.classList.add('preview--selected');
+    } else {
+      fileNameDisplay.textContent =  "Файл не выбран";
+      fileNameDisplay.classList.remove('preview--selected');
+    }
+  });
 });
