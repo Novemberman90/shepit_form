@@ -1,36 +1,257 @@
 @use 'importer' as *;
 
 .feedback-form {
-  background-color: $withe-400;
-  &__header {
-    padding: 40px 40px 60px;
-    background-color: $green-700;
-    border-bottom-left-radius: 50px;
-    border-bottom-right-radius: 50%;
-    overflow: hidden;
-  }
-  .logo {
-    margin-bottom: 50px;
-    img {
+  padding-bottom: 60px;
+  .form {
+    &__header {
+      padding: 40px 40px 60px;
+      background-color: $green-700;
+      border-bottom-left-radius: 50px;
+      border-bottom-right-radius: 50px;
+      overflow: hidden;
+      margin-bottom: 30px;
+    }
+    .logo {
+     margin: 0 auto 50px auto;
+      width: 125px;
+      height: 216px;
+      img {
+        width: 100%;
+        height: auto;
+        object-fit: cover;
+      }
+    }
+    &__title {
+      @include KyivTypeSans-350;
+      font-size: 18px;
+      line-height: 1;
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    .rating {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: row-reverse;
+      gap: 15px;
+      &__item {
+        @extend %radio-hidden;
+      }
+      &__item:checked ~ .rating__label{
+        svg {
+          path {
+            fill: $gold-star;
+          }
+        }
+      }
+      &__label {
+        svg {
+          path {
+            fill: $main-grey
+          }
+        }
+        &:hover {
+          svg {
+            path {
+              fill: $gold-star;
+            }
+          }
+        }
+        &:active {
+          opacity: .7;
+        }
+      }
+    }
+    .rating-error-message {
+      text-align: center;
+      margin: 0 auto;
+      display: block;
+      padding-top: 10px;
+      font-size: 14px;
+    }
+    /* Контані дані */
+    &__fieldset {
+      margin-bottom: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+    }
+    .input-box {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 25px;
+      border-radius: 50px;
+      border: 1px solid $main-grey;
       width: 100%;
-      height: auto;
-      object-fit: cover;
+      .icon {
+      }
+      input {
+        @include KyivTypeSans-350;
+        font-size: 18px;
+        line-height: 1;
+        color: $text;
+        border: none;
+        outline: none;
+        width: 100%;
+        &::placeholder {
+          @include KyivTypeSans-350;
+          font-size: 18px;
+          line-height: 1;
+          color: $text;
+        }
+      }
+      &:has(input:hover) {
+        border: 1px solid $green-700;
+        cursor: pointer;
+      }
+      &:focus-within {
+        border: 1px solid $gold-star;
+      }
+    }
+    .photo-title {
+      color: $text;
+      margin-bottom: 5px;
+    }
+
+    .photo-block {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      width: 100%;
+    }
+    .photo-box {
+      padding: 5px;
+      background-color: $main-grey;
+      @include KyivTypeSans-350;
+      font-size: 18px;
+      line-height: 1;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+    .photo-icon-label {
+      color: $text;
+    }
+    .preview {
+      margin-top: 10px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .textarea-box {
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      padding: 10px 25px;
+      border-radius: 20px;
+      border: 1px solid $main-grey;
+      width: 100%;
+      height: 100%;
+      &:has(input:hover) {
+        border: 1px solid $green-700;
+        cursor: pointer;
+      }
+    
+      &:focus-within {
+        border: 1px solid $gold-star;
+      }
+    }
+    .textarea {
+      width: 100%;
+      height: 170px;
+      resize: none;
+      border: none;
+      outline: none;
+      &::placeholder {
+        @include KyivTypeSans-350;
+        font-size: 18px;
+        line-height: 1;
+        color: $text;
+      }
+    }
+    .btn-send {
+      width: 100%;
+      border: 1px solid transparent;
+      border-radius: 20px;
+      padding: 14px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      color: $white-400;
+      background-color: $green-700;
+      outline-offset: 4px;
+      transition: background-color 0.3s, outline 0.3s, opacity 0.3s;
+    
+      &:hover {
+        background-color: $green-600;
+      }
+    
+      &:focus {
+        outline: 1px solid $green-600;
+      }
+    
+      &:active {
+        opacity: 0.7;
+      }
     }
   }
-  &__title {
-    @include KyivTypeSans-350;
-    font-size: 18px;
-    line-height: 1;
-    text-align: center;
+  .error-message {
+    display: none;
+    font-size: 14px;
   }
-  .rating {
+}
+
+.success {
+  background-color: $green-700;
+  position: relative;
+  &__btn-close {
+    background-color: transparent;
+    border: none;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 15px;
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    top: 40px;
+    right: 25px;
+    padding: 0;
+    svg {
+      width: 30px;
+      height: 30px;
+    }
   }
-
-  /* Контані дані */
-
-  
+  &__inner {
+    padding: 60px 0 60px;
+  }
+  &__logo {
+    width: 230px;
+    height: auto;
+    object-fit: cover;
+    margin: 0 auto 80px auto;
+  }
+  &__title {
+    font-size: 34px;
+    line-height: 1;
+    @include KyivTypeSans-700;
+    text-align: center;
+    color: $white-400;
+    margin-bottom: 35px;
+  }
+  &__text {
+    color: $white-400;
+    font-size: 24px;
+    text-align: center;
+    margin-bottom: 35px;
+  }
+  &__bottom {
+    color: $white-400;
+    text-align: center;
+  }
 }
