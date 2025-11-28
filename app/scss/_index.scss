@@ -76,7 +76,7 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      gap: 20px;
+      gap: 30px;
     }
     .input-box {
       display: flex;
@@ -109,6 +109,10 @@
       }
       &:focus-within {
         border: 1px solid $gold-star;
+      }
+      &.error {
+        border: 1px solid red;
+        position: relative;
       }
     }
     .photo-title {
@@ -202,8 +206,11 @@
     }
   }
   .error-message {
-    display: none;
+    color: red;
     font-size: 14px;
+    position: absolute;
+    bottom: -20px;
+    display: none;
   }
 }
 
