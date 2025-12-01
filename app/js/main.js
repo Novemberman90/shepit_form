@@ -91,21 +91,30 @@ window.addEventListener('DOMContentLoaded',()=>{
     const isCheched = [...ratingInputs].some(input => input.checked);
 
     if(!isCheched) {
-      ratingError.style.display = "block";
+      ratingError.style.visibility = "visible";
       return false;
     }
 
-    ratingError.style.display = "none";
+    ratingError.style.visibility = "hidden";
     return true;
   }
 
-    // Скрыть ошибку при выборе звезды
-  ratingInputs.forEach(input => {
-    input.addEventListener("change", () => {
-      validateRating(); 
-    });
-  });
 
+  let lastCheckedRating = null;
+  ratingInputs.forEach(input => {
+    input.addEventListener('click', (e)=>{
+    // Повторный клик по уже выбранной звезде → сбрасываем рейтинг
+      if(lastCheckedRating === e.target) {
+        e.target.checked = false;
+        lastCheckedRating = null;
+        validateRating(); // просим поставить оценку
+        return;
+      }
+      // запоминаю выбранный элемент
+      lastCheckedRating = e.target;
+      validateRating(); // серыть ошибку
+    })
+  });
 
   /* Убираю сообщение об ошибке */
   nameInput.addEventListener("input", validateName);
@@ -120,6 +129,7 @@ let selectedFiles = [];
 /* Элементы */
 const fileInput = document.querySelector('#photos');
 const previewContainer = document.getElementById("photoPreview");
+const photoBlockError = document.querySelector('.form__photo-error');
 
   /* === Добавление файлов === */
   fileInput.addEventListener("change", () => {
@@ -128,7 +138,9 @@ const previewContainer = document.getElementById("photoPreview");
 
     // Проверка количества
     if (selectedFiles.length + newFiles.length > 5) {
-      previewContainer.innerHTML = `<p class="preview__none--active">Максимум 5 фото.</p>`;
+      //previewContainer.innerHTML = `<p class="preview__none--active">Максимум 5 фото.</p>`;
+     // previewContainer.innerHTML = "";
+      photoBlockError.innerHTML = `<p class="form__photo-error-txt form__photo-error-txt--active">Максимум 5 фото.</p>`;
       fileInput.value = "";
       return;
     }
@@ -136,7 +148,8 @@ const previewContainer = document.getElementById("photoPreview");
     // Проверка размера
     newFiles.forEach(file => {
       if (file.size > 5 * 1024 * 1024) {
-        previewContainer.innerHTML = `<p class="preview__none--active">Файл <b>${file.name}</b> перевищує 5 МБ.</p>`;
+       // previewContainer.innerHTML = `<p class="preview__none--active">Файл <b>${file.name}</b> перевищує 5 МБ.</p>`;
+        photoBlockError.innerHTML = `<p class="form__photo-error-txt form__photo-error-txt--active">Файл <b>${file.name}</b> перевищує 5 МБ.</p>`;
         fileInput.value = "";
         hasError = true;
         return; // выходим только из цикла
@@ -147,6 +160,8 @@ const previewContainer = document.getElementById("photoPreview");
 
     if (hasError) return;   // остановил выполнение, чтобы НЕ вызывать renderFileList()
 
+    photoBlockError.innerHTML ="";
+
     fileInput.value = "";  
     renderFileList();
   });
@@ -156,7 +171,7 @@ const previewContainer = document.getElementById("photoPreview");
   previewContainer.innerHTML = "";
 
   if (selectedFiles.length === 0) {
-    previewContainer.innerHTML = `<p class="preview__none">Файл не вибрано. Максимальний розмір 5 МВ</p>`;
+    photoBlockError.innerHTML = `<p class="form__photo-error-txt">Файл не вибрано. Максимальний розмір 5 МВ</p>`;
     return;
   } 
 
@@ -184,19 +199,6 @@ const previewContainer = document.getElementById("photoPreview");
     renderFileList();               // перерисовать список
   }
 
-/*     form.addEventListener('submit', (e)=>{
-    e.preventDefault();
-
-    const isNameValid = validateName();
-    const isPhoneValid = validatePhone();
-    const isRatingValid = validateRating();
-
-    if(!isNameValid || !isPhoneValid || !isRatingValid) {
-      return;
-    }
-
-    console.log('Форма прошла валидацию успешно и готова к отрпавке');
-  }); */
 
 form.addEventListener("submit", async (e) => {
   e.preventDefault();
