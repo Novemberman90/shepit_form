@@ -263,7 +263,7 @@ console.log("Отправляем рейтинг:", ratingValue);
   /* Показ окна */
   function showSuccessMessage() {
     successMessage.classList.add("active");
-    document.body.classList.toggale('lock');
+    document.body.classList.toggle('lock');
 
 
     // Автозакрытие через 5 секунд
@@ -276,6 +276,7 @@ console.log("Отправляем рейтинг:", ratingValue);
   /* Скрыть окно */
   function hideSuccessMessage() {
     successMessage.classList.remove("active");
+    document.body.classList.remove("lock");
     clearTimeout(successTimer);
   }
 
