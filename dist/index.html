@@ -93,19 +93,23 @@
           </div>
   
           <!-- Фото -->
-           <div class="photo-block">
-             <p class="photo-title">Додати фото</p>
-             <label class="photo-box">
-               <span class="photo-icon">
-                 <svg width="27" height="27" viewBox="0 0 27 27" fill="none" xmlns="http://www.w3.org/2000/svg">
-                   <path
-                     d="M3 27C2.175 27 1.469 26.7065 0.882 26.1195C0.295 25.5325 0.001 24.826 0 24V3C0 2.175 0.294 1.469 0.882 0.882C1.47 0.295 2.176 0.001 3 0H24C24.825 0 25.5315 0.294 26.1195 0.882C26.7075 1.47 27.001 2.176 27 3V24C27 24.825 26.7065 25.5315 26.1195 26.1195C25.5325 26.7075 24.826 27.001 24 27H3ZM4.5 21H22.5L16.875 13.5L12.375 19.5L9 15L4.5 21Z"
-                     fill="#132C27" />
-                 </svg>
-               </span> <p class="photo-icon-label">Фото</p>
-               <input type="file" id="photos" accept="image/*" multiple hidden>
-             </label>
-             <div id="photoPreview" class="preview"></div>
+           <div class="form__photo-block">
+             <p class="form__photo-title">Додати фото</p>
+             <div class="form__photo-block-inner">
+               <label class="form__photo-box">
+                 <span class="form__photo-icon">
+                   <svg width="27" height="27" viewBox="0 0 27 27" fill="none" xmlns="http://www.w3.org/2000/svg">
+                     <path
+                       d="M3 27C2.175 27 1.469 26.7065 0.882 26.1195C0.295 25.5325 0.001 24.826 0 24V3C0 2.175 0.294 1.469 0.882 0.882C1.47 0.295 2.176 0.001 3 0H24C24.825 0 25.5315 0.294 26.1195 0.882C26.7075 1.47 27.001 2.176 27 3V24C27 24.825 26.7065 25.5315 26.1195 26.1195C25.5325 26.7075 24.826 27.001 24 27H3ZM4.5 21H22.5L16.875 13.5L12.375 19.5L9 15L4.5 21Z"
+                       fill="#132C27" />
+                   </svg>
+                 </span> <p class="form__photo-icon-label">Фото</p>
+                 <input type="file" id="photos" accept="image/*" multiple hidden>
+               </label>
+               <div id="photoPreview" class="preview">
+                <p class="preview__none">Файл не вибрано. Максимальний розмір 5 МВ</p>
+               </div>
+             </div>
            </div>
           
           <!-- Повідомлення -->
@@ -118,7 +122,7 @@
           <textarea id="message" class="textarea" placeholder="Ваш коментар"></textarea>
         </div>
         </div>
-        <button id="sendBtn" class="btn-send">Надіслати</button>
+        <button id="sendBtn" class="btn-send" type="submit">Надіслати</button>
   
         <p class="form-status" id="formStatus"></p>
       </div>
