@@ -267,19 +267,21 @@
 
 .success {
   &.active {
-    position: absolute;
-    inset: 0;
-    height: 100vh;
-    transform: translateY(0);
-    transition: all .5s;
     opacity: 1;
-    z-index: 5;
+    visibility: visible;
+    transform: translateY(0);
+    transition: opacity .4s ease,
+      transform .4s ease;
   }
-  transform: translateY(-500%);
+  position: fixed;
+  inset: 0;
+  height: 100vh;
   opacity: 0;
+  transform: translateY(-30px); // лёгкое смещение
+  visibility: hidden;
+  transition: opacity .4s ease,
+  transform .4s ease;
   background-color: $green-700;
-  position: absolute;
-  transition: all .5s;
   &__btn-close {
     background-color: transparent;
     border: none;
