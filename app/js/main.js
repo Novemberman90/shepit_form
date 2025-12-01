@@ -203,7 +203,7 @@ form.addEventListener("submit", async (e) => {
 
   const isNameValid = validateName();
   const isPhoneValid = validatePhone();
-  const isRatingValid = validateRating();
+ 
 
   if (!isNameValid || !isPhoneValid) {
     return;
@@ -226,7 +226,7 @@ form.addEventListener("submit", async (e) => {
   spinner.classList.add("spinner");
   spinner.innerHTML = "<span>Відправка...</span>";
   form.insertAdjacentElement("afterend", spinner);
-
+console.log("Отправляем рейтинг:", ratingValue);
   try {
     const response = await fetch("../mail.php", {
       method: "POST",
