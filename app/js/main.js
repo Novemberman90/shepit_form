@@ -261,10 +261,13 @@ console.log("Отправляем рейтинг:", ratingValue);
   /* Показ окна */
   function showSuccessMessage() {
     successMessage.classList.add("active");
+    document.body.classList.toggale('lock');
+
 
     // Автозакрытие через 5 секунд
     successTimer = setTimeout(() => {
       hideSuccessMessage();
+      document.body.classList.remove('lock');
     }, 5000);
   }
 

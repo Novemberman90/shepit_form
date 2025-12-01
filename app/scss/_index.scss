@@ -267,14 +267,19 @@
 
 .success {
   &.active {
-    display: block;
     position: absolute;
     inset: 0;
     height: 100vh;
+    transform: translateY(0);
+    transition: all .5s;
+    opacity: 1;
+    z-index: 5;
   }
-  display: none;
+  transform: translateY(-500%);
+  opacity: 0;
   background-color: $green-700;
-  position: relative;
+  position: absolute;
+  transition: all .5s;
   &__btn-close {
     background-color: transparent;
     border: none;
