@@ -285,9 +285,10 @@
     transition: opacity .4s ease,
       transform .4s ease;
   }
+  display: flex;
+  height: 100%;
   position: fixed;
   inset: 0;
-  height: 100vh;
   opacity: 0;
   transform: translateY(-30px); // лёгкое смещение
   visibility: hidden;
@@ -313,9 +314,13 @@
   }
   &__inner {
     padding: 60px 0 60px;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
   }
   &__logo {
-    width: 230px;
+    max-width: 230px;
+    width: 100%;
     height: auto;
     object-fit: cover;
     margin: 0 auto 80px auto;
@@ -333,11 +338,33 @@
     font-size: 24px;
     text-align: center;
     margin-bottom: 35px;
+    @include KyivTypeSans-350-2;
   }
   &__bottom {
     color: $white-400;
     text-align: center;
-  }  &.active {
-    display: block;
+  }
+}
+
+@media (max-width: 380px) {
+  .success {
+    &__btn-close {
+      top: 30px;
+    }
+    &__inner {
+      padding: 50px 0;
+    }
+    &__logo {
+      width: 50%;
+      margin-bottom: 30px;
+    }
+    &__title {
+      margin-bottom: 25px;
+      font-size: 32px;
+    }
+    &__text {
+      font-size: 20px;
+      margin-bottom: 25px;
+    }
   }
 }

@@ -18,3 +18,13 @@
   font-display: swap;
 }
 
+@font-face {
+  font-family: 'KyivTypeSans-Regular2';
+  font-weight: 350;
+  font-style: normal;
+  src: local('KyivTypeSans-Regular2'),
+    url('../fonts/KyivTypeSans-Regular2.woff2') format('woff2'),
+    url('../fonts/KyivTypeSans-Regular2.woff') format('woff');
+  font-display: swap;
+}
+

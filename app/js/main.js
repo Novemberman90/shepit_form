@@ -222,7 +222,7 @@ fileInput.addEventListener("change", () => {
     });
   } */
 
-    function renderFileList() {
+    const renderFileList =()=> {
   previewContainer.innerHTML = "";
 
   if (selectedFiles.length === 0) {
@@ -248,27 +248,27 @@ fileInput.addEventListener("change", () => {
   });
 
   updateStorageInfo();
-}
-
-function updateStorageInfo() {
-  const totalSize = selectedFiles.reduce((sum, file) => sum + file.size, 0);
-  const maxSize = 25 * 1024 * 1024;
-  const remaining = maxSize - totalSize;
-
-  // Приводим к МБ
-  const toMB = (bytes) => (bytes / (1024 * 1024)).toFixed(2);
-
-  if (totalSize === 0) {
-    photoBlockError.innerHTML = `<p class="form__photo-error-txt">Файл не вибрано.</p> <p class="form__photo-hint">Доступно для завантаження: ${toMB(maxSize)} МБ</p>`;
-  } else {
-    photoBlockError.innerHTML = `
-      <p class="form__photo-hint">
-        Завантажено: ${toMB(totalSize)} МБ із 25 МБ<br>
-        Залишилось: ${toMB(remaining)} МБ
-      </p>
-    `;
   }
-}
+
+  const updateStorageInfo =() => {
+    const totalSize = selectedFiles.reduce((sum, file) => sum + file.size, 0);
+    const maxSize = 25 * 1024 * 1024;
+    const remaining = maxSize - totalSize;
+
+    // Приводим к МБ
+    const toMB = (bytes) => (bytes / (1024 * 1024)).toFixed(2);
+
+    if (totalSize === 0) {
+      photoBlockError.innerHTML = `<p class="form__photo-error-txt">Файл не вибрано.</p> <p class="form__photo-hint">Доступно для завантаження: ${toMB(maxSize)} МБ</p>`;
+    } else {
+      photoBlockError.innerHTML = `
+        <p class="form__photo-hint">
+          Завантажено: ${toMB(totalSize)} МБ із 25 МБ<br>
+          Залишилось: ${toMB(remaining)} МБ
+        </p>
+      `;
+    }
+  }
 
 
   /* Удаление файла */
@@ -285,6 +285,12 @@ function updateStorageInfo() {
   updateStorageInfo();
 };
 
+// Получаем QR ID из URL
+const urlParams = new URLSearchParams(window.location.search);
+const qrId = urlParams.get("qr");
+
+// Записываем в скрытое поле
+document.getElementById("qr_id").value = qrId;
 
 form.addEventListener("submit", async (e) => {
   e.preventDefault();
@@ -305,6 +311,7 @@ form.addEventListener("submit", async (e) => {
   formData.append("phone", phoneInput.value.trim());
   formData.append("rating", ratingValue);
   formData.append("message", document.getElementById("message").value.trim() || "");
+  formData.append("QR_ID", qrId);
 
   selectedFiles.forEach((file) => {
     formData.append("photos[]", file);
@@ -314,7 +321,7 @@ form.addEventListener("submit", async (e) => {
   spinner.classList.add("spinner");
   spinner.innerHTML = "<span>Відправка...</span>";
   form.insertAdjacentElement("afterend", spinner);
-console.log("Отправляем рейтинг:", ratingValue);
+  console.log("Отправляем рейтинг:", ratingValue);
   try {
 
     const response = await fetch("https://shepit.archiviz.biz/mail.php", {
@@ -350,20 +357,17 @@ console.log("Отправляем рейтинг:", ratingValue);
   /* Показ окна */
   function showSuccessMessage() {
     successMessage.classList.add("active");
-    document.body.classList.toggle('lock');
 
 
     // Автозакрытие через 5 секунд
     successTimer = setTimeout(() => {
       hideSuccessMessage();
-      document.body.classList.remove('lock');
     }, 5000);
   }
 
   /* Скрыть окно */
   function hideSuccessMessage() {
     successMessage.classList.remove("active");
-    document.body.classList.remove("lock");
     clearTimeout(successTimer);
   }
 

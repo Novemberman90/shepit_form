@@ -16,6 +16,18 @@ $white-400: #FFFFFF;
   font-family: "KyivTypeSerif-Bold", sans-serif;
   font-weight: 700;
 }
+@mixin KyivTypeSans-350-2 {
+  font-family: "KyivTypeSans-Regular2", sans-serif;
+  font-weight: 350;
+}
+@mixin KyivTypeSans-350-3 {
+  font-family: "KyivTypeSans-Regular3", sans-serif;
+  font-weight: 350;
+}
+@mixin KyivTypeSans-300 {
+  font-family: "KyivTypeSerif-Light", sans-serif;
+  font-weight: 350;
+}
 
 
  %checkbox-hidden,
