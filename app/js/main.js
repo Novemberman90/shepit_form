@@ -132,7 +132,7 @@ const previewContainer = document.getElementById("photoPreview");
 const photoBlockError = document.querySelector('.form__photo-error');
 
   /* === Добавление файлов === */
-  fileInput.addEventListener("change", () => {
+/*   fileInput.addEventListener("change", () => {
     const newFiles = Array.from(fileInput.files);
     let hasError = false;
 
@@ -164,10 +164,40 @@ const photoBlockError = document.querySelector('.form__photo-error');
 
     fileInput.value = "";  
     renderFileList();
-  });
+  }); */
+
+/* === Добавление файлов === */
+fileInput.addEventListener("change", () => {
+  const newFiles = Array.from(fileInput.files);
+  let hasError = false;
+
+  let totalSize = selectedFiles.reduce((sum, file) => sum + file.size, 0);
+
+  // Добавляем файлы в сумму
+  newFiles.forEach(file => totalSize += file.size);
+
+  // Превышение лимита 25 МБ
+  if (totalSize > 25 * 1024 * 1024) {
+    photoBlockError.innerHTML = `
+      <p class="form__photo-error-txt form__photo-error-txt--active">
+        Перевищено максимальний розмір 25 МБ. Видаліть зайві файли.
+      </p>
+    `;
+    fileInput.value = "";
+    return;
+  }
+
+  // Добавляем файлы
+  newFiles.forEach(file => selectedFiles.push(file));
+
+  fileInput.value = "";
+  renderFileList();
+  updateStorageInfo();
+});
+
 
 /*  Отрисовка списка файлов  */
-  function renderFileList() {
+/*   function renderFileList() {
   previewContainer.innerHTML = "";
 
   if (selectedFiles.length === 0) {
@@ -190,14 +220,70 @@ const photoBlockError = document.querySelector('.form__photo-error');
     document.querySelectorAll(".delete-file").forEach(btn => {
       btn.addEventListener("click", deleteFile);
     });
+  } */
+
+    function renderFileList() {
+  previewContainer.innerHTML = "";
+
+  if (selectedFiles.length === 0) {
+    photoBlockError.innerHTML = `<p class="form__photo-hint">Доступно для завантаження: 25 МБ Файл</p> `;
+    return;
   }
 
+  selectedFiles.forEach((file, index) => {
+    const item = document.createElement("div");
+    item.classList.add("preview__item");
+
+    item.innerHTML = `
+      <span class="file-name">${file.name}</span>
+      <button class="delete-file" data-index="${index}">Х</button>
+    `;
+
+    previewContainer.appendChild(item);
+  });
+
+  // обработчик на кнопки удаления
+  document.querySelectorAll(".delete-file").forEach(btn => {
+    btn.addEventListener("click", deleteFile);
+  });
+
+  updateStorageInfo();
+}
+
+function updateStorageInfo() {
+  const totalSize = selectedFiles.reduce((sum, file) => sum + file.size, 0);
+  const maxSize = 25 * 1024 * 1024;
+  const remaining = maxSize - totalSize;
+
+  // Приводим к МБ
+  const toMB = (bytes) => (bytes / (1024 * 1024)).toFixed(2);
+
+  if (totalSize === 0) {
+    photoBlockError.innerHTML = `<p class="form__photo-error-txt">Файл не вибрано.</p> <p class="form__photo-hint">Доступно для завантаження: ${toMB(maxSize)} МБ</p>`;
+  } else {
+    photoBlockError.innerHTML = `
+      <p class="form__photo-hint">
+        Завантажено: ${toMB(totalSize)} МБ із 25 МБ<br>
+        Залишилось: ${toMB(remaining)} МБ
+      </p>
+    `;
+  }
+}
+
+
   /* Удаление файла */
-  const deleteFile =(e)=> {
+/*   const deleteFile =(e)=> {
     const index = e.target.dataset.index;
     selectedFiles.splice(index, 1); // удалить файл из массива
     renderFileList();               // перерисовать список
-  }
+  } */
+
+    const deleteFile = (e) => {
+  const index = e.target.dataset.index;
+  selectedFiles.splice(index, 1);
+  renderFileList();
+  updateStorageInfo();
+};
 
 
 form.addEventListener("submit", async (e) => {
@@ -230,7 +316,8 @@ form.addEventListener("submit", async (e) => {
   form.insertAdjacentElement("afterend", spinner);
 console.log("Отправляем рейтинг:", ratingValue);
   try {
-    const response = await fetch("../mail.php", {
+
+    const response = await fetch("https://shepit.archiviz.biz/mail.php", {
       method: "POST",
       body: formData,
     });
