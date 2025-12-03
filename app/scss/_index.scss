@@ -14,7 +14,7 @@
     .logo {
      margin: 0 auto 50px auto;
       width: 125px;
-      height: 216px;
+      height: auto;
       img {
         width: 100%;
         height: auto;
@@ -346,19 +346,31 @@
   }
 }
 
-@media (max-width: 428px) {
+@media (max-width: 440px) {
   .feedback-form {
+    padding-bottom: 30px;
     .form__header {
-      padding: 20px 20px 40px;
+      padding: 20px 20px 30px;
+      margin-bottom: 20px;
       .logo {
-        margin-bottom: 30px;
+        margin-bottom: 20px;
+        width: 100px;
       }
       .form__title {
         margin-bottom: 20px;
       }
     }
+    .form__fieldset {
+      gap: 20px;
+    }
+    .error-message {
+      font-size: 14px;
+      bottom: -16px;
+    }
+   .form .textarea {
+      height: 120px;
+    }
   }
-  
   .success {
     &__logo {
       width: 50%;
@@ -367,17 +379,36 @@
   }
 }
 @media (max-width: 380px) {
-  .feedback-form  {
-    .form {
-      .logo {
-/*         width: 100%;
-        height: 100%; */
-        img {
+  .feedback-form {
+      .form__header {
+        .logo {
+          margin-bottom: 10px;
+          width: 90px;
+        }
+  
+        .form__title {
+          margin-bottom: 10px;
+        }
+      }
+      .form__fieldset {
+        gap: 20px;
+      }
+      .form .input-box {
+        input {
+          font-size: 16px;
+          &::placeholder {
+            font-size: 16px;
+          }
+        }
+      }
+      .form.textarea {
+        height: 120px;
 
+        &::placeholder {
+          font-size: 14px;
         }
       }
     }
-  }
   .success {
     &__btn-close {
       top: 30px;
@@ -401,22 +432,6 @@
 }
 
 @media (max-width: 340px) {
-  .feedback-form {
-    .form__header {
-      padding-bottom: 20px;
-      .logo {
-        width: 90px;
-        height: auto;
-        margin-bottom: 10px;
-      }
-      .form__title {
-        margin-bottom: 10px;
-      }
-    }
-    .form__fieldset {
-      gap: 20px;
-    }
-  } 
     
   .success {
     &__btn-close {
