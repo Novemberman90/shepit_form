@@ -323,8 +323,8 @@ form.addEventListener("submit", async (e) => {
   form.insertAdjacentElement("afterend", spinner);
   console.log("Отправляем рейтинг:", ratingValue);
   try {
-
-    const response = await fetch("https://shepit.archiviz.biz/mail.php", {
+    //https://shepit.archiviz.biz/mail.php
+    const response = await fetch("../mail.php", {
       method: "POST",
       body: formData,
     });
